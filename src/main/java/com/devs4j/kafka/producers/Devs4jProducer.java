@@ -25,7 +25,7 @@ public class Devs4jProducer {
 
         try (Producer<String, String> producer = new KafkaProducer<>(properties)) {
             for (int i = 0; i < 1000000; i++) {
-                producer.send(new ProducerRecord<>("devs4j-topic", String.valueOf(i), "devs4j-value"));
+                producer.send(new ProducerRecord<>("devs4j-topic", (i % 2 == 0) ? "key-2" : "key-3", String.valueOf(i)));
             }
             producer.flush();
         }
