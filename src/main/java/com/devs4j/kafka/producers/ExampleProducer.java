@@ -22,6 +22,7 @@ public class ExampleProducer {
         properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         properties.put("linger.ms", "10");
+        properties.put("max.in.flight.requests.per.connection", 1);
 
         try (Producer<String, String> producer = new KafkaProducer<>(properties)) {
             final int user1 = 1020;
