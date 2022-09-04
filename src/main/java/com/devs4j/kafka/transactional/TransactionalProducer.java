@@ -25,15 +25,21 @@ public class TransactionalProducer {
         properties.put("linger.ms", "10");
 
         try (Producer<String, String> producer = new KafkaProducer<>(properties)) {
-            producer.initTransactions();
-            producer.beginTransaction();
-
-            for (int i = 0; i < 1000000; i++) {
-                producer.send(new ProducerRecord<>("devs4j-topic", String.valueOf(i), "devs4j-value"));
+            try {
+                producer.initTransactions();
+                producer.beginTransaction();
+                for (int i = 0; i < 100000; i++) {
+                    producer.send(new ProducerRecord<>("devs4j-topic", String.valueOf(i), "devs4j-value"));
+                    if (i == 50000) {
+                        throw new Exception("Unexpected Exception");
+                    }
+                }
+                producer.commitTransaction();
+                producer.flush();
+            } catch (Exception e) {
+                log.error("Error ", e);
+                producer.abortTransaction();
             }
-
-            producer.commitTransaction();
-            producer.flush();
         }
 
         log.info("Processing time = {} ms", System.currentTimeMillis() - startTime);
