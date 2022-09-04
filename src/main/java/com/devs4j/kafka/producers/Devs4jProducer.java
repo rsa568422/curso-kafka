@@ -24,7 +24,7 @@ public class Devs4jProducer {
         properties.put("linger.ms", "10"); // serialización
 
         try (Producer<String, String> producer = new KafkaProducer<>(properties)) {
-            for (int i = 0; i < 10000; i++) {
+            for (int i = 0; i < 1000000; i++) {
                 producer.send(new ProducerRecord<>("devs4j-topic", String.valueOf(i), "devs4j-value"));
             }
             producer.flush();

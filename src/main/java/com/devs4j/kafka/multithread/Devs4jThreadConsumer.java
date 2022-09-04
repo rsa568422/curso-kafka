@@ -31,11 +31,18 @@ public class Devs4jThreadConsumer extends Thread {
             while (!closed.get()) {
                 ConsumerRecords<String, String> consumerRecords = consumer.poll(Duration.ofMillis(100));
                 for (ConsumerRecord<String, String> consumerRecord : consumerRecords) {
-                    log.info("Offset = {}, Partition = {}, Key = {}, Value = {}",
+                    log.debug("Offset = {}, Partition = {}, Key = {}, Value = {}",
                             consumerRecord.offset(),
                             consumerRecord.partition(),
                             consumerRecord.key(),
                             consumerRecord.value());
+                    if ((Integer.parseInt(consumerRecord.key()) % 100000) == 0) {
+                        log.info("Offset = {}, Partition = {}, Key = {}, Value = {}",
+                                consumerRecord.offset(),
+                                consumerRecord.partition(),
+                                consumerRecord.key(),
+                                consumerRecord.value());
+                    }
                 }
             }
         } catch (WakeupException e) {
