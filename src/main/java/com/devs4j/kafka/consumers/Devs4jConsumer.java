@@ -1,5 +1,6 @@
-package com.devs4j.kafka.producers;
+package com.devs4j.kafka.consumers;
 
+import com.devs4j.kafka.producers.Devs4jProducer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;

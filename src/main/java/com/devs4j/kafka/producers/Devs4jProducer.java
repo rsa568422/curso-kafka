@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Properties;
-import java.util.concurrent.ExecutionException;
 
 public class Devs4jProducer {
 
@@ -24,17 +23,6 @@ public class Devs4jProducer {
         properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer"); // serialización
         properties.put("linger.ms", "10"); // serialización
 
-        // versión síncrona
-        /*try (Producer<String, String> producer = new KafkaProducer<>(properties)) {
-            for (int i = 0; i < 10000; i++) {
-                producer.send(new ProducerRecord<>("devs4j-topic", String.valueOf(i), "devs4j-value")).get();
-            }
-            producer.flush();
-        } catch (InterruptedException | ExecutionException e) {
-            log.error("Message producer interrupted ", e);
-        }*/
-
-        // versión asíncrona
         try (Producer<String, String> producer = new KafkaProducer<>(properties)) {
             for (int i = 0; i < 10000; i++) {
                 producer.send(new ProducerRecord<>("devs4j-topic", String.valueOf(i), "devs4j-value"));
