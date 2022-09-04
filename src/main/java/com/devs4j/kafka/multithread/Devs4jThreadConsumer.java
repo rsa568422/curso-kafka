@@ -18,7 +18,7 @@ public class Devs4jThreadConsumer extends Thread {
 
     private final AtomicBoolean closed = new AtomicBoolean(false);
 
-    private static final Logger log = LoggerFactory.getLogger(Devs4jProducer.class);
+    private static final Logger log = LoggerFactory.getLogger(Devs4jThreadConsumer.class);
 
     public Devs4jThreadConsumer(KafkaConsumer<String, String> consumer) {
         this.consumer = consumer;
