@@ -27,8 +27,8 @@ public class Devs4jThreadConsumer extends Thread {
     @Override
     public void run() {
         consumer.subscribe(Arrays.asList("devs4j-topic"));
-        while (!closed.get()) {
-            try {
+        try {
+            while (!closed.get()) {
                 ConsumerRecords<String, String> consumerRecords = consumer.poll(Duration.ofMillis(100));
                 for (ConsumerRecord<String, String> consumerRecord : consumerRecords) {
                     log.info("Offset = {}, Partition = {}, Key = {}, Value = {}",
@@ -37,13 +37,13 @@ public class Devs4jThreadConsumer extends Thread {
                             consumerRecord.key(),
                             consumerRecord.value());
                 }
-            } catch (WakeupException e) {
-                if (!closed.get()) {
-                    throw e;
-                }
-            } finally {
-                consumer.close();
             }
+        } catch (WakeupException e) {
+            if (!closed.get()) {
+                throw e;
+            }
+        } finally {
+            consumer.close();
         }
     }
 
