@@ -48,7 +48,7 @@ public class Devs4jCallbackProducer {
 
 class Devs4jCallback implements Callback {
 
-    public static final Logger log = LoggerFactory.getLogger(Devs4jCallbackProducer.class);
+    public static final Logger log = LoggerFactory.getLogger(Devs4jCallback.class);
 
     @Override
     public void onCompletion(RecordMetadata recordMetadata, Exception exception) {

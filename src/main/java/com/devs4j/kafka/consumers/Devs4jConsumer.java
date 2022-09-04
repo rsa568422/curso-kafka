@@ -13,7 +13,7 @@ import java.util.Properties;
 
 public class Devs4jConsumer {
 
-    public static final Logger log = LoggerFactory.getLogger(Devs4jProducer.class);
+    public static final Logger log = LoggerFactory.getLogger(Devs4jConsumer.class);
 
     public static void main(String[] args) {
 
